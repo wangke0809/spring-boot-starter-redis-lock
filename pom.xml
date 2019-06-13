@@ -11,7 +11,7 @@
 
     <groupId>cn.yueshutong</groupId>
     <artifactId>spring-boot-starter-redis-lock</artifactId>
-    <version>0.0.2.RELEASE</version>
+    <version>0.0.1.RELEASE</version>
 
     <name>spring-boot-starter-redis-lock</name>
 
