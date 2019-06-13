@@ -27,10 +27,7 @@ public class RedisLock {
         if (absent == null) {
             return false;
         }
-        //是否成功获取锁
-        if (absent) {
-            return true;
-        }
+        return absent;
     }
 
     public boolean unlock(String key, String value) {
