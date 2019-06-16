@@ -4,17 +4,17 @@ SnowJean项目的衍生品，使用非常简单，前提是你的spring boot已�
 
 ## Maven
 
-```xml
+``` xml
 <dependency>
   <groupId>cn.yueshutong</groupId>
   <artifactId>spring-boot-starter-redis-lock</artifactId>
-  <version>0.0.1.RELEASE</version>
+  <version>1.0.0.RELEASE</version>
 </dependency>
 ```
 
 ## Use
 
-```java
+``` java
 
     @Autowired
     private RedisLock lock;

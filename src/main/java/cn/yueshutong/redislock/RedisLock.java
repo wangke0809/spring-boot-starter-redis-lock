@@ -21,28 +21,19 @@ public class RedisLock {
     private long timeout = 5000;
 
     public boolean lock(String key, String value) {
-        long start = System.currentTimeMillis();
-        while (true) {
-            //检测是否超时
-            if (System.currentTimeMillis() - start > timeout) {
-                return false;
-            }
-            //执行set命令
-            Boolean absent = template.opsForValue().setIfAbsent(key, value, timeout, TimeUnit.MILLISECONDS);//1
-            //其实没必要判NULL，这里是为了程序的严谨而加的逻辑
-            if (absent == null) {
-                return false;
-            }
-            //是否成功获取锁
-            if (absent) {
-                return true;
-            }
+        //执行set命令
+        Boolean absent = template.opsForValue().setIfAbsent(key, value, timeout, TimeUnit.MILLISECONDS);//1
+        //其实没必要判NULL，这里是为了程序的严谨而加的逻辑
+        if (absent == null) {
+            return false;
         }
-    }
+        //是否成功获取锁
+        return absent;
+}
 
     public boolean unlock(String key, String value) {
         //使用Lua脚本：先判断是否是自己设置的锁，再执行删除
-        Long result = template.execute(redisScript, Arrays.asList(key,value));
+        Long result = template.execute(redisScript, Arrays.asList(key, value));
         //返回最终结果
         return RELEASE_SUCCESS.equals(result);
     }
